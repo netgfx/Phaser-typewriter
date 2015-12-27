@@ -14,7 +14,7 @@ GameState.prototype.preload = function () {
 // Setup the example
 GameState.prototype.create = function () {
   // Set stage background to something sky colored
-  this.game.stage.backgroundColor = 0xcdcdcd;
+  this.game.stage.backgroundColor = 0x1e1e1e;
   this.add.image(150, 0, "bg");
   reg.track = _game.add.audio('track');
 

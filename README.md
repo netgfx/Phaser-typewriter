@@ -25,7 +25,7 @@ typewriter.init(gameInstance, {
 
 <img src="http://i221.photobucket.com/albums/dd22/djmid71/sample_zpsaybshdsk.gif"/>
 
-<strong>View example: <a href="http://www.netgfx.com/trunk/games/tools/phaser-typewriter">Complete example</a></strong>
+<strong>View example: <a href="http://www.netgfx.com/trunk/games/tools/phaser-typewriter">Complete example (make sure to listen to the writing sound playing in the background ;) )</a></strong>
 
   <hr>
 

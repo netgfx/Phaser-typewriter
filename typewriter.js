@@ -25,27 +25,31 @@ function Typewriter() {
     }
 
     function enableTypingSpecificMessage(text, x, y) {
-        var quote = text;
+
         if (_that.writerObj === null) {
-            _that.typedText = game.add.bitmapText(x, y, _that.fontFamily, "", _that.fontSize);
-            _that.typedText.maxWidth = _that.maxWidth;
+            _that.typedText = game.add.bitmapText(x, y, _that.fontFamily, text, _that.fontSize);
         } else {
             _that.typedText = _that.writerObj;
-            _that.typedText.maxWidth =_that.maxWidth;
         }
+        _that.typedText.maxWidth = _that.maxWidth;
+        _that.currentLetter = 0;
+        var length = _that.typedText.children.length;
 
-        _that.pickedQuote = quote;
+        for (var i = 0; i < length; i++){
+            var letter = _that.typedText.getChildAt(i);
+            letter.alpha = 0;
+        }
 
         if (_that.sound !== null) {
             _that.sound.play();
         }
 
         _that.typedText.x = x;
-        _that.typedText.y = y
+        _that.typedText.y = y;
         if (_that.endFn !== null) {
-            countdown(typeWriter, quote.length, _that.endFn);
+            countdown(typeWriter, length, _that.endFn);
         } else {
-            countdown(typeWriter, quote.length);
+            countdown(typeWriter, length);
         }
     }
 
@@ -74,8 +78,9 @@ function Typewriter() {
                 _that.sound.play();
             }
         }
-        var length = _that.typedText.text.length;
-        _that.typedText.text += _that.pickedQuote.charAt(length);
+        var letter = _that.typedText.getChildAt(_that.currentLetter);
+        letter.alpha = 1;
+        _that.currentLetter++;
     }
 
     return {

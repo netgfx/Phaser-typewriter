@@ -4,6 +4,7 @@ function Typewriter() {
     this.pickedQuote;
     var _that = this;
     var game;
+
     function init(gameInstance, options) {
         game = gameInstance;
         _that.time = options.time || Phaser.Timer.SECOND / 10;
@@ -24,6 +25,19 @@ function Typewriter() {
         enableTypingSpecificMessage(_that.text, _that.x, _that.y);
     }
 
+    function stop() {
+        if (_that.timer !== undefined) {
+            _that.timer.stop();
+            game.time.events.remove(_that.timer);
+        }
+        if (_that.sound !== null) {
+            _that.sound.stop();
+        }
+        if(_that.typedText !== undefined){
+            _that.typedText.destroy();
+        }
+    }
+
     function enableTypingSpecificMessage(text, x, y) {
 
         if (_that.writerObj === null) {
@@ -35,7 +49,7 @@ function Typewriter() {
         _that.currentLetter = 0;
         var length = _that.typedText.children.length;
 
-        for (var i = 0; i < length; i++){
+        for (var i = 0; i < length; i++) {
             var letter = _that.typedText.getChildAt(i);
             letter.alpha = 0;
         }
@@ -62,7 +76,7 @@ function Typewriter() {
     function countdown(fn, times, endFn) {
         var _timer = game.time.create(false);
         _timer.start();
-        endFn = endFn || function () {
+        endFn = endFn || function() {
             game.time.events.remove(_timer);
             if (_that.sound !== null) {
                 _that.sound.stop();
@@ -70,6 +84,7 @@ function Typewriter() {
         };
         _timer.onComplete.add(endFn);
         _timer.repeat(_that.time, times, fn, this);
+        _that.timer = _timer;
     }
 
     function typeWriter(text) {
@@ -84,10 +99,11 @@ function Typewriter() {
     }
 
     return {
-        init: function (gameInstance, options) {
+        init: function(gameInstance, options) {
             init(gameInstance, options);
         },
-        start: function () {
+        start: function() {
+            stop();
             start();
         },
         destroy: function() {

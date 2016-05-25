@@ -9,6 +9,7 @@ function Typewriter() {
         game = gameInstance;
         _that.time = options.time || Phaser.Timer.SECOND / 10;
         _that.sound = options.sound || null;
+        _that.soundMarker = options.soundMarker || null;
         _that.writerFn = options.writerFn || null;
         _that.endFn = options.endFn || null;
         _that.times = options.times || 10;
@@ -33,9 +34,9 @@ function Typewriter() {
         if (_that.sound !== null) {
             _that.sound.stop();
         }
-        if(_that.typedText !== undefined){
-            _that.typedText.destroy();
-        }
+        //if(_that.typedText !== undefined){ // This can cause problems if you repeatedly type to a text object. ~Tilde
+        //    _that.typedText.destroy();
+        //}
     }
 
     function enableTypingSpecificMessage(text, x, y) {
@@ -54,8 +55,11 @@ function Typewriter() {
             letter.alpha = 0;
         }
 
-        if (_that.sound !== null) {
-            _that.sound.play();
+        if (_that.sound !== null) { // Made some alterations for sound markers here. ~Tilde
+            if (_that.soundMarker !== null)
+                _that.sound.play(_that.soundMarker, null, 1, true, true);
+            else
+                _that.sound.play('', null, 1, true, true);
         }
 
         _that.typedText.x = x;

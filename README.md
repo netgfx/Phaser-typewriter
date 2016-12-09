@@ -1,3 +1,5 @@
+[![forthebadge](http://forthebadge.com/images/badges/uses-js.svg)](http://forthebadge.com)
+
 # Phaser-typewriter
 A typewriter effect wrapper for Phaser.io Javascript library
 

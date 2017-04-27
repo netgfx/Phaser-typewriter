@@ -4,10 +4,12 @@
 A typewriter effect wrapper for Phaser.io Javascript library
 
 <h3>Initialize the typewriter anywhere in your game</h3>
+
 ```
 var typewriter = new Typewriter();
 typewriter.init(gameInstance, options);
 ```
+
 pass necesery options like: context (the object that launches the typewriter)
 
 ```
